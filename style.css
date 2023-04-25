@@ -540,9 +540,9 @@ footer .copyright {
   text-align: center;
 }
 
-/*Shop Page*/
+/*Shop Page MEN*/
 
-#page-header {
+#page-header{
   background-image: url(img/banner/b1.jpg);
   width: 100%;
   height: 40vh;
@@ -576,6 +576,27 @@ footer .copyright {
   font-size: 16px;
   font-weight: 600;
 }
+
+
+/*Shop Page WOMAN*/
+
+#page-headerW {
+  background-image: url(img/banner/b21.avif);
+  width: 100%;
+  height: 40vh;
+  background-size: cover;
+  display: flex;;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 14px;
+}
+
+#page-headerW h2,
+#page-headerW p {
+  color: white;
+}
+
 
 /*Single Product*/
 
