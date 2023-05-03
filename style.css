@@ -849,7 +849,7 @@ footer .copyright {
 
 #form-details form input,
 #form-details form textarea {
-  width: 100%;
+  width: 60%;
   padding: 12px 15px;
   outline: none;
   margin-bottom: 20px;
@@ -862,6 +862,7 @@ footer .copyright {
 }
 
 #form-details .people  div {
+  padding-top: 30px;
   padding-bottom: 25px;
   display: flex;
   align-items: flex-start;
@@ -1015,7 +1016,7 @@ footer .copyright {
 
 /*Smart Media Query*/
 
-@media (max-width: 799px) {
+@media (max-width: 850px) {
   .section-p1 {
     padding: 40px 40px;
   }
@@ -1119,6 +1120,10 @@ footer .copyright {
   #form-details form{    
     width: 45%;    
   }
+  #form-details form input,
+  #form-details form textarea {
+   width: 100%;
+  }
 }
 
   @media (max-width: 477px) {
@@ -1141,7 +1146,7 @@ footer .copyright {
 
   #hero {
     padding: 0 20px;
-    background-position: 55%;
+    background-position: 60%;
   }
 
   #feature {
@@ -1230,20 +1235,20 @@ footer .copyright {
   
   /*About Page*/
 
-#about-head {
+  #about-head {
     flex-direction: column;
   }
 
-#about-head img {
+  #about-head img {
   width: 100%;
   margin-bottom: 20px;
   }
 
-#about-head div {
+  #about-head div {
   padding-left: 0px;
   }
 
-#about-app .video {
+  #about-app .video {
   width: 100%;
   }
 
@@ -1269,10 +1274,16 @@ footer .copyright {
   }
 
   #form-details form{
-   width: 100%;
+    width: 100%;
     margin-bottom: 30px;
   }
 
+  #form-details form input,
+  #form-details form textarea {
+   width: 100%;
+  }
+
+  
   /* Card Page*/
    
   #card-add {
