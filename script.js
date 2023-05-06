@@ -13,3 +13,8 @@ if (close){
         nav.classList.remove('active');
     })
 }
+
+/*This one here prevents the scroll up effect when pressing X */
+document.getElementById("close").addEventListener("click", function(event){
+    event.preventDefault();
+});
