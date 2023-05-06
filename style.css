@@ -138,7 +138,7 @@ body {
 
 /* Home Page */
 #hero {
-  background-image: url("img/hero4.png");
+  background-image: url("img/Spring23_Website_Hero_Images-Creative-Drafts19_2048x.webp.png");
   height: 90vh;
   width: 100%;
   background-size: cover;
@@ -544,7 +544,7 @@ footer .copyright {
 /*Shop Page MEN*/
 
 #page-header{
-  background-image: url(img/banner/b1.jpg);
+  background-image: url(img/banner/men.jpg);
   width: 100%;
   height: 40vh;
   background-size: cover;
@@ -582,7 +582,7 @@ footer .copyright {
 /*Shop Page WOMAN*/
 
 #page-headerW {
-  background-image: url(img/banner/b21.avif);
+  background-image: url(img/banner/women2.jpg);
   width: 100%;
   height: 40vh;
   background-size: cover;
@@ -897,6 +897,11 @@ footer .copyright {
 }
 
 /*Card Page*/
+
+#page-header.cart-header {
+  background-image: url("img/card2.jpg");
+}
+
 
 #card {    
   overflow-x: auto;
