@@ -1,4 +1,4 @@
-import { productArray } from './cart.js'
+//import { productArray } from './cart.js'
 
 
 const bar = document.getElementById('bar');
