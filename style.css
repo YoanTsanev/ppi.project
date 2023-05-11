@@ -929,13 +929,6 @@ footer .copyright {
   background-image: url("img/card2.jpg");
 }
 
-
-#card {    
-  overflow-x: auto;
-}
-
-
-
 #card table {
   width: calc(100% - 17px);
   border-collapse: collapse;
@@ -1164,6 +1157,9 @@ footer .copyright {
   #form-details form textarea {
    width: 100%;
   }
+
+
+
 }
 
   @media (max-width: 477px) {
@@ -1325,7 +1321,21 @@ footer .copyright {
 
   
   /* Card Page*/
-   
+  
+  #card  table {
+    display: block;    
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+
+  #card th, td {
+     min-width: 100px;
+ }
+  
+     
   #card-add {
     flex-direction: column;
   }
