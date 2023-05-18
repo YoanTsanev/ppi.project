@@ -10,7 +10,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/*PROBA*/
+/*Scroll Button*/
 
 #progress {
   position: fixed;
@@ -186,15 +186,15 @@ body {
 }
 
 #hero button {
-  background-image: url("img/button1.png");
-  background-color: transparent;
-  color: white;
-  border: 0;
-  padding: 14px 80px 14px 65px;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 15px;
+  
+  background-color: #088178;
+  color: #fff;
+}
+
+#hero button:hover {
+  background: #E8F6EA;
+  color: black;
+  border: 1px solid #088178;
 }
 
 #feature {
@@ -1333,7 +1333,7 @@ footer .copyright {
 
   #card th, td {
      min-width: 100px;
- }
+  }
   
      
   #card-add {
