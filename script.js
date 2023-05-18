@@ -1,6 +1,3 @@
-//import { productArray } from './cart.js'
-
-
 const bar = document.getElementById('bar');
 const close = document.getElementById('close');
 const nav = document.getElementById('navbar');
@@ -16,99 +13,138 @@ if (close){
         nav.classList.remove('active');
     })
 }
+
+
 /*This one here prevents the scroll up effect when pressing X */
 document.getElementById("close").addEventListener("click", function(event){
     event.preventDefault();
 });
 
 
+function isElementInLocalStorage(name) {
+    for (let i = 0; i < localStorage.length; ++i) {
+        const item = JSON.parse(localStorage.getItem(i.toString()))
+
+        if (item == null || item == undefined)
+            continue;
+
+        if (name == item.model)
+            return true;
+    }
+
+    return false;
+}
+
+function generateID() {
+    const keys = Object.keys(localStorage);
+    const numbers = keys.filter(item => !isNaN(item)).map(Number);
+
+    if (numbers.length === 0)
+        return 1;
+
+    let maxNumber = Math.max(...numbers);
+    
+    return maxNumber + 1;
+}
+
+
 document.querySelector('.normal').addEventListener('click', () => {
-        // Get the data from the div with class "description"
+        const id = generateID();
         const image = document.querySelector('.single-pro-image img').src.substring(22);
         const model = document.querySelector('.single-pro-details h4').textContent;
         let price = parseFloat(document.querySelector('.single-pro-details h2').textContent);
-        price = parseFloat(price.toFixed(2)) + 0.99;
+        price = parseFloat(price.toFixed(2));
 
-        // Create an object with the data
         const product = {
+            id,
             image,
             model,
             price
         };
 
-        localStorage.setItem(localStorage.length.toString(), JSON.stringify(product));
+        if (!isElementInLocalStorage(model)) 
+        {
+            localStorage.setItem(id.toString(), JSON.stringify(product));
+            console.log(product);
+        }
+        else
+        {
+            const query = `quantity-${i}`.toString();
+            let inputElement = document.querySelector(query);
+            console.log(inputElement);
+            let value = parseInt(inputElement.value);
+            // Increment the value
+            value++;
+            // Update the input with the new value
+            inputElement.value = value;
+        }
     }
 );
 
 
 if (location.pathname === '/card.html') {
-    function template(image, model, price) {
-        return `<tr class="tablerow"><td><a href="#" class="linkcart"><i class="far fa-times-circle"></i></a></td><td><img src='${image}' alt=""></td><td>${model}</td><td>${price} лв.</td><td><input type="number" value="1"></td><td>${price} лв.</td></tr>`;
-    }
-
-    for (let i = 0; i < localStorage.length; ++i) {
-        if (JSON.parse(localStorage.getItem(i.toString())) == null)
-            continue;
-    
-        productArray.push(JSON.parse(localStorage.getItem(i.toString())))
-    }
-
-    let sum = 0;
     let tbody = document.querySelector('.cart');
 
-    for (let i = 0; i < productArray.length; ++i) {
-        if (productArray[i] == null)
-            continue;
-
-        sum += productArray[i].price;
-
-        tbody.innerHTML += template(productArray[i].image, productArray[i].model, productArray[i].price);
+    function template(id, image, model, price) {
+        return `<tr class="tablerow-${id}"><td><a href="#" class="linkcart"><i class="far fa-times-circle"></i></a></td><td><img src='${image}' alt=""></td><td>${model}</td><td>${price} лв.</td><td><input class="quantity-${id}" type="number" value="1"></td><td>${price} лв.</td></tr>`;
     }
 
-    let tdarr = document.querySelectorAll(".totalsum");
+    function calculateSum() {
+        const keys = Object.keys(localStorage);
+        let sum = 0;
 
-    for (let i = 0; i < tdarr.length; ++i) {
-        tdarr[i].textContent = `${sum} лв.` ;
+        for (let i = 0; i < keys.length; ++i)
+        {
+            if (isNaN(parseFloat(keys[i])) || !isFinite(keys[i]))
+                continue;
+
+            const shoeObj = JSON.parse(localStorage.getItem(keys[i]));
+
+            // const query = `quantity-${shoeObj.id}`.toString();
+            // let inputElement = document.querySelector(query);
+
+            // let value = parseInt(inputElement.value);
+            sum += parseFloat(shoeObj.price.toFixed(2)); // * value;
+        }
+
+        return sum.toFixed(2);
     }
+
+    function renderCartContent() 
+    {
+        const keys = Object.keys(localStorage);
+
+        for (let i = 0; i < keys.length; ++i)
+        {
+            if (isNaN(parseFloat(keys[i])) || !isFinite(keys[i]))
+                continue;
+
+            const shoeObj = JSON.parse(localStorage.getItem(keys[i]));
+
+            tbody.innerHTML += template(shoeObj.id, shoeObj.image, shoeObj.model, shoeObj.price.toFixed(2));
+        }
+
+        let tdarr = document.querySelectorAll(".totalsum");
+
+        for (let i = 0; i < tdarr.length; ++i) {
+            tdarr[i].textContent = `${calculateSum()} лв.` ;
+        }
+    }
+
+    renderCartContent();
 
     document.querySelector('.cart').addEventListener('click', (event) => {
-        console.log(event.target);
-        if (event.target.classList.contains('.linkcart')) {
-            const td = event.target.parentNode;
-            td.parentNode.removeChild(td);
+        const row = event.target.closest('tr');
+        const className = row.classList.toString();
+        const removeId = parseInt(className.split('-')[1]);
+
+        localStorage.removeItem(removeId.toString());
+
+        tbody.innerHTML = '';
+        renderCartContent();
+
+        if (tbody.children.length === 0) {
+            localStorage.clear();
         }
     });
-
-    if (tbody.children.length === 0) {
-        localStorage.clear();
-    }
 }
-
-
-
-{/* <tr>
-        <td><a href="#" class="linkcart"><i class="far fa-times-circle"></i></a></td>
-        <td><img src="img/products/nike/NIKE Обувки AIR WINFLO 9/1.png" alt=""></td>
-        <td>NIKE AIR WINFLO 9</td>
-        <td>199,99 лв.</td>
-        <td><input type="number" value="1"></td>
-        <td>199,99 лв.</td>
-    </tr>
-
-                <tr>
-                    <td><a href="#" class="linkcart"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="img/products/adidas/ADIDAS PERFORMANCE Обувки EQ19 Run/1.png" alt=""></td>
-                    <td>ADIDAS PERFORMANCE EQ19 Run</td>
-                    <td>249,99 лв.</td>
-                    <td><input type="number" value="1"></td>
-                    <td>249,99 лв.</td>
-                </tr>
-
-                <tr>
-                    <td><a href="#" class="linkcart"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="img/products/nike/NIKE Обувки DOWNSHIFTER 12/3.png" alt=""></td>
-                    <td>NIKE DOWNSHIFTER 12</td>
-                    <td>149,99 лв.</td>
-                    <td><input type="number" value="1"></td>
-                    <td>149,99 лв.</td>
-                </tr> */}
