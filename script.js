@@ -14,7 +14,6 @@ if (close){
     })
 }
 
-
 /*This one here prevents the scroll up effect when pressing X */
 document.getElementById("close").addEventListener("click", function(event){
     event.preventDefault();
@@ -53,7 +52,8 @@ document.querySelector('.normal').addEventListener('click', () => {
         const image = document.querySelector('.single-pro-image img').src.substring(22);
         const model = document.querySelector('.single-pro-details h4').textContent;
         let price = parseFloat(document.querySelector('.single-pro-details h2').textContent);
-        price = parseFloat(price.toFixed(2));
+        price = parseFloat(price.toFixed(2)) + 0.99;
+        
 
         const product = {
             id,
@@ -62,22 +62,22 @@ document.querySelector('.normal').addEventListener('click', () => {
             price
         };
 
-        if (!isElementInLocalStorage(model)) 
-        {
+        // if (!isElementInLocalStorage(model)) 
+        // {
             localStorage.setItem(id.toString(), JSON.stringify(product));
             console.log(product);
-        }
-        else
-        {
-            const query = `quantity-${i}`.toString();
-            let inputElement = document.querySelector(query);
-            console.log(inputElement);
-            let value = parseInt(inputElement.value);
-            // Increment the value
-            value++;
-            // Update the input with the new value
-            inputElement.value = value;
-        }
+        // }
+        // else
+        // {
+        //     const query = `quantity-${id}`;
+        //     let inputElement = document.querySelector(query);
+        //     console.log(inputElement);
+        //     let value = parseInt(inputElement.value);
+        //     // Increment the value
+        //     value++;
+        //     // Update the input with the new value
+        //     inputElement.value = value;
+        // }
     }
 );
 
